@@ -1,6 +1,8 @@
+import moment from "moment/moment";
 import React from "react";
 
-const SearchResults = () => {
+const SearchResults = (props) => {
+  // console.log(props);
   return (
     <table class="table">
       <thead>
@@ -13,30 +15,34 @@ const SearchResults = () => {
           <th scope="col">Room-ID</th>
           <th scope="col">Check-In-Date</th>
           <th scope="col">Check-Out-Date</th>
+          <th scope="col">NumberOfNights</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {props.results.map((result) => (
+          <tr>
+            {result.id}
+            <td>{result.title}</td>
+            <td>{result.firstName}</td>
+            <td>{result.surname}</td>
+            <td>{result.email}</td>
+            <td>{result.roomId}</td>
+            <td>{result.checkInDate}</td>
+            <td>{result.checkOutDate}</td>
+            <td>
+              {totalNumberOfNights(result.checkOutDate, result.checkInDate)}
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
 };
+
+function totalNumberOfNights(left, entrance) {
+  let checkOutDate = moment(left);
+  let checkInDate = moment(entrance);
+  return checkOutDate.diff(checkInDate, "days");
+}
 
 export default SearchResults;

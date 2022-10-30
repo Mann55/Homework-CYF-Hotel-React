@@ -1,12 +1,14 @@
 import React from "react";
 
-const Footer = props => {
+const Footer = (props) => {
   return (
-    <ul>
-      {props.footerAddress.map(element => (
-        <p>{element}</p>
-      ))}
-    </ul>
+    <div className="footerData">
+      <ul>
+        {props.footerAddress.map((element) => (
+          <p>{element}</p>
+        ))}
+      </ul>
+    </div>
   );
 };
 
