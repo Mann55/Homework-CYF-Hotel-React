@@ -1,8 +1,16 @@
 import moment from "moment/moment";
-import React from "react";
+import React, { useState } from "react";
 
 const SearchResults = (props) => {
   // console.log(props);
+  const [clickedRow, SetClickedRow] = useState();
+  function handleRowClicked(index) {
+    // which element is going to clicked
+    //console.log("clicked");
+    SetClickedRow(index);
+    console.log(clickedRow);
+  }
+
   return (
     <table class="table">
       <thead>
@@ -19,8 +27,12 @@ const SearchResults = (props) => {
         </tr>
       </thead>
       <tbody>
-        {props.results.map((result) => (
-          <tr>
+        {props.results.map((result, index) => (
+          <tr
+            key={index}
+            onClick={() => handleRowClicked(index)}
+            className={clickedRow == index ? "highlight" : null}
+          >
             {result.id}
             <td>{result.title}</td>
             <td>{result.firstName}</td>
